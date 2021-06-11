@@ -1,0 +1,10 @@
+menuconfig LIBYAZ
+	bool "yaz Unikraft library"
+	default n
+
+if LIBYAZ
+config LIBYAZ_MAIN_FUNCTION
+	bool "Provide main function"
+	default n
+
+endif
