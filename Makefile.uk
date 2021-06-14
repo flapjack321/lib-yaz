@@ -40,7 +40,7 @@ $(eval $(call addlib_s,libyaz,$(CONFIG_LIBYAZ)))
 # Sources
 ################################################################################]
 LIBYAZ_VERSION = 500739dab32f1c2c6c7102bb34732407e6e17550
-LIBYAZ_URL = https://github.com/jsommers/yaz
+LIBYAZ_URL = https://github.com/jsommers/yaz/archive/$(LIBYAZ_VERSION).zip
 LIBYAZ_SUBDIR = yaz-$(LIBYAZ_VERSION)
 LIBYAZ_PATCHDIR = $(LIBYAZ_BASE)/patches
 $(eval $(call patch,libyaz,$(LIBYAZ_PATCHDIR),$(LIBYAZ_SUBDIR)))
@@ -48,13 +48,15 @@ $(eval $(call fetch,libyaz,$(LIBYAZ_URL)))
 
 ################################################################################
 # Helpers
-################################################################################
+##################################CINCLUDES-y += -I$(LIBYAZ_SRC)
+##############################################
 LIBYAZ_SRC = $(LIBYAZ_ORIGIN)/$(LIBYAZ_SUBDIR)
 
 ################################################################################
 # Library includes
 ################################################################################
 CINCLUDES-y += -I$(LIBYAZ_BASE)/include
+LIBYAZ_CXXINCLUDES-y += -I$(LIBYAZ_BASE)/include-internal
 
 ################################################################################
 # Flags
@@ -79,3 +81,10 @@ LIBYAZSRCS-$(CONFIG_LIBYAZ_MAIN_FUNCTION) += $(LIBYAZ_BASE)/main.c|unikraft
 # Library sources
 ################################################################################
 # LIBYAZ_SRCS-y += # Include source files here
+LIBYAZ_SRCS-y += $(LIBYAZ_SRC)/yaz_recv.cc
+LIBYAZ_SRCS-y += $(LIBYAZ_SRC)/yaz_send.cc
+LIBYAZ_SRCS-y += $(LIBYAZ_SRC)/yaz.cc
+
+ifeq ($(CONFIG_LIBYAZ_MAIN_FUNCTION),y)
+LIBYAZ_SRCS-y += $(LIBYAZ_SRC)/main.cc
+endif
