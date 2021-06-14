@@ -41,7 +41,7 @@
 
 #define HAVE_SCHED_SETSCHEDULER 0
 
-#define HAVE_SYSCONF 1
+#define HAVE_SYSCONF 0
 
 /* #undef HAVE_SYSCTLBYNAME */
 
