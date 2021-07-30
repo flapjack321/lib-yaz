@@ -1,7 +1,7 @@
 From d36aa0482491bf533710cb59eda14575d242758d Mon Sep 17 00:00:00 2001
 From: Ethan Cotterell <ethancotterell@gmail.com>
 Date: Fri, 11 Jun 2021 18:52:41 +0100
-Subject: [PATCH 2/3] yaz: fix ip to ip_hdr struct
+Subject: [PATCH 2/4] yaz: fix ip to ip_hdr struct
 
 ---
  yaz_send.cc | 53 ++++++++++++++++++++++++++---------------------------
@@ -377,5 +377,5 @@ index 66dfd08..d9a9c06 100644
  }
 -
 -- 
-2.25.1
+2.20.1
 

@@ -1,0 +1,25 @@
+From f2ec9ed1084b429c3267198f58dc0fb81efc0bca Mon Sep 17 00:00:00 2001
+From: Ethan Cotterell <ethancotterell@gmail.com>
+Date: Fri, 30 Jul 2021 10:35:56 +0100
+Subject: [PATCH 4/4] yaz_recv: fix timeout issue when using LwIP
+
+---
+ yaz_recv.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/yaz_recv.cc b/yaz_recv.cc
+index bff4ee0..5218ea3 100644
+--- a/yaz_recv.cc
++++ b/yaz_recv.cc
+@@ -207,7 +207,7 @@ void YazReceiver::run()
+                 pfd[1].revents = 0;
+ 
+                 npfd = 2;
+-                int rv = poll(&pfd[0], npfd, 0);
++                int rv = poll(&pfd[0], npfd, 1);
+                 if (rv == -1)
+                 {
+                     std::cerr << "error in poll(): " << errno << '/' << strerror(errno) << std::endl;
+-- 
+2.20.1
+
